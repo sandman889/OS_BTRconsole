@@ -21,10 +21,10 @@ public class BTRconsole implements Runnable {
 
 	public void getCommands() {
 		System.out.print("BTR=-> ");
-		
-		Scanner in = new Scanner(System.in);
-		String cmd = in.nextLine();
-		runCommand(cmd);		
+
+		//String cmd = kernel.getLine();
+		//runCommand(cmd);		
+		running = false;
 	}
 
 	public void runCommand(String cmd) {

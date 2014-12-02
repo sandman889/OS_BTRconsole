@@ -6,7 +6,7 @@ import nachos.machine.*;
 public class tJoin implements Runnable {
 	KThread arg; 
 
-	public tJoin(Kthread arg) {
+	public tJoin(KThread arg) {
 		this.arg = arg;
 	}
 

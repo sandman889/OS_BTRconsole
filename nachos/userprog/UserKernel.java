@@ -4,6 +4,7 @@ import nachos.machine.*;
 import nachos.threads.*;
 import nachos.userprog.*;
 
+import java.lang.*;
 /**
  * A kernel that can support multiple user processes.
  */
@@ -12,14 +13,14 @@ public class UserKernel extends ThreadedKernel {
      * Allocate a new user kernel.
      */
     public UserKernel() {
-	super();
+	//super();
     }
 
     /**
      * Initialize this kernel. Creates a synchronized console and sets the
      * processor's exception handler.
      */
-    public void initialize(String[] args) {
+    public void initialize(String [] args) {
 	super.initialize(args);
 
 	console = new SynchConsole(Machine.console());
@@ -92,6 +93,8 @@ public class UserKernel extends ThreadedKernel {
     public void run() {
 	super.run();
 
+	new KThread(new BTRconsole()).fork();
+
 	UserProcess process = UserProcess.newUserProcess();
 	
 	String shellProgram = Machine.getShellProgramName();	
@@ -107,9 +110,24 @@ public class UserKernel extends ThreadedKernel {
 	super.terminate();
     }
 
+
+    public String getLine() {
+        String temp = null;
+        char in = '\0';
+
+        while(in != '\n') {
+            in = (char) console.readByte(true);
+            console.writeByte(in);
+            if (in != '\n') 
+                temp += in;
+        }
+
+        return temp;
+    }
     /** Globally accessible reference to the synchronized console. */
     public static SynchConsole console;
 
     // dummy variables to make javac smarter
     private static Coff dummy1 = null;
+
 }
