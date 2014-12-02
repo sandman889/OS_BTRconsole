@@ -12,6 +12,7 @@ public class BTRconsole implements Runnable {
 		while(running) {
 			getCommands();
 		}
+		kernel.terminate();
 	}
 
 	public BTRconsole() {
@@ -23,32 +24,39 @@ public class BTRconsole implements Runnable {
 
 		String cmd = kernel.getLine();
 		cmd.trim();
-		runCommand(cmd);		
+		runCommand(cmd);	
 	}
 
 	public void runCommand(String cmd) {
 		if(cmd.equals("exit")) {
+			System.out.println("Exiting nachOS");
 			running = false;
 		}
 		else if (cmd.equals("help")) {
-			//help stuff
+			System.out.println("\n====Available Commands==== \n" + 
+								"tCreate <name> : creates a thread with specified name \n" +
+								"tRun <name> : runs a thread with specified name \n" +
+								"tSleep <name> : sleeps the specified thread \n" +
+								"tJoin <name> : joins the specified thread\n" +
+								"tSpawn <name> : spawns specified thread \n" +
+								"tAbort <name> : aborts the specified thread\n");
 		}
-		else if (cmd == "tCreate") {
+		else if (cmd.equals("tCreate")) {
 			//ribin ish
 		}
-		else if (cmd == "tRun") {
+		else if (cmd.equals("tRun")) {
 			//ribin ish
 		}
-		else if (cmd == "tSleep") {
+		else if (cmd.equals("tSleep")) {
 			//tilir ish
 		}
-		else if (cmd == "tJoin") {
+		else if (cmd.equals("tJoin")) {
 			//tilir ish
 		}
-		else if (cmd == "tSpawn") {
+		else if (cmd.equals("tSpawn")) {
 			//barn ish
 		}
-		else if (cmd == "tAbort") {
+		else if (cmd.equals("tAbort")) {
 			//barn ish 
 		}
 		else {
