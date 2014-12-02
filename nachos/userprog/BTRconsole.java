@@ -15,10 +15,6 @@ public class BTRconsole implements Runnable {
 		kernel.terminate();
 	}
 
-	public BTRconsole() {
-		super();
-	}
-
 	public void getCommands() {
 		System.out.print("BTR=-> ");
 
@@ -65,6 +61,5 @@ public class BTRconsole implements Runnable {
 	}
 
 	private boolean running;
-	//List<KThread> threadPool = new KThread();
-	public UserKernel kernel = null;
+	public UserKernel kernel;
 }
