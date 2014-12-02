@@ -74,7 +74,7 @@ public final class Lib {
      */     
     public static void assertTrue(boolean expression) {
 	if (!expression)
-	    throw new AssertionFailureError();
+	   throw new AssertionFailureError();
     }
 
     /**

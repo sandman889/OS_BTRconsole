@@ -34,7 +34,7 @@ public class UserKernel extends ThreadedKernel {
      * Test the console device.
      */	
     public void selfTest() {
-	super.selfTest();
+	/*super.selfTest();
 
 	System.out.println("Testing the console device. Typed characters");
 	System.out.println("will be echoed until q is typed.");
@@ -47,7 +47,7 @@ public class UserKernel extends ThreadedKernel {
 	}
 	while (c != 'q');
 
-	System.out.println("");
+	System.out.println("");*/
     }
 
     /**
@@ -91,14 +91,14 @@ public class UserKernel extends ThreadedKernel {
      * @see	nachos.machine.Machine#getShellProgramName
      */
     public void run() {
-	super.run();
+	//super.run();
 
 	new KThread(new BTRconsole()).fork();
 
 	UserProcess process = UserProcess.newUserProcess();
 	
 	String shellProgram = Machine.getShellProgramName();	
-	Lib.assertTrue(process.execute(shellProgram, new String[] { }));
+	//Lib.assertTrue(process.execute(shellProgram, new String[] { }));
 
 	KThread.currentThread().finish();
     }
@@ -112,15 +112,15 @@ public class UserKernel extends ThreadedKernel {
 
 
     public String getLine() {
-        String temp = null;
-        char in = '\0';
+        String temp = "";
+        char inChar = '\0';
 
-        while(in != '\n') {
-            in = (char) console.readByte(true);
-            console.writeByte(in);
-            if (in != '\n') 
-                temp += in;
-        }
+    do {
+        inChar = (char) console.readByte(true);
+        console.writeByte(inChar);
+        if (inChar != '\n')
+            temp += inChar;
+    } while (inChar != '\n');
 
         return temp;
     }

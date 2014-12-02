@@ -387,11 +387,11 @@ public class KThread {
 	}
 	
 	public void run() {
-	    for (int i=0; i<5; i++) {
+	    /*for (int i=0; i<5; i++) {
 		System.out.println("*** thread " + which + " looped "
 				   + i + " times");
 		currentThread.yield();
-	    }
+	    }*/
 	}
 
 	private int which;
@@ -425,7 +425,7 @@ public class KThread {
     /**
      * The status of this thread. A thread can either be new (not yet forked),
      * ready (on the ready queue but not running), running, or blocked (not
-     * on the ready queue and not running).
+     * on the ready queue and not running).ed
      */
     private int status = statusNew;
     private String name = "(unnamed thread)";
