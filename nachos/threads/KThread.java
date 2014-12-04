@@ -250,12 +250,13 @@ public class KThread {
     }
     
     //========== USER ADDED STUFF ===============
-    public static void sleep(long x) {
+    public static void sleepTime(int x) {
         long initialTime = Machine.timer().getTime();
         currentThread.status = statusBlocked;
+        long currentTime = initialTime;
 
-        while (Machine.timer().getTime() < (initialTime + x))
-            //spinning
+        while (currentTime < (initialTime + x))
+            currentTime = Machine.timer().getTime();
 
         currentThread.status = statusRunning;
     }

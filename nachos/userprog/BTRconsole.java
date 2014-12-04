@@ -71,18 +71,18 @@ public class BTRconsole implements Runnable {
 		}
 
 		//!!-- DOES NOT WORK. NEED TO CHANGE PARSER IN ORDER TO GET INT --!!
-		/*
+
 		else if (cmd.equals("tSleep")) {
 
 			for(KThread t : threadPool)
-				if(t.getName().equals(name)) {
+				if((t.getName()).equals(name)) {
 					System.out.println(name + " is sleeping. Zzzzz. \n");
-					t.sleep(time);
+					t.sleepTime(100);
 				}
 				else 
 					System.out.println(name + " not found, cannot sleep");
 		}
-		*/
+		
 		else if (cmd.equals("tJoin")) {
 		//	name.join();
 			System.out.println(name + " has been joined successfully. \n");
@@ -95,6 +95,9 @@ public class BTRconsole implements Runnable {
 		else if (cmd.equals("tAbort")) {
 			//barn ish 
 		}
+
+		else if (cmd.equals("tList"))
+			System.out.println(threadPool);
 
 		else {
 			System.out.println(cmd + " is not a recognized command");			
