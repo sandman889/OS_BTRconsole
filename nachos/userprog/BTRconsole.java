@@ -14,16 +14,30 @@ public class BTRconsole implements Runnable {
 		}
 		kernel.terminate();
 	}
-
+	
+	public void parseCommands(String line, String cmd, String name, String file){
+		String[] param = line.split("\\s+");
+		cmd = param[0];
+		name = param[1].replace("<", "");
+		name = name.replace(">", "");
+		file = param[2].replace("<", "");
+		file = file.replace(">", "");
+		System.out.println(cmd + " " + name + " " + file);
+		
+	}
+	
 	public void getCommands() {
 		System.out.print("BTR=-> ");
-
-		String cmd = kernel.getLine();
-		cmd.trim();
-		runCommand(cmd);	
+		String line = kernel.getLine();
+		String cmd = "";
+		String name = "";
+		String file = "";
+		line.trim();
+		parseCommands(line, cmd, name, file);
+		runCommand(cmd, name, file);	
 	}
 
-	public void runCommand(String cmd) {
+	public void runCommand(String cmd, String name, String file) {
 		if(cmd.equals("exit")) {
 			System.out.println("Exiting nachOS");
 			running = false;
