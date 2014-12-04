@@ -3,6 +3,8 @@ package nachos.userprog;
 import nachos.threads.*;
 import nachos.machine.*;
 
+import java.util.ArrayList;
+
 public class BTRconsole implements Runnable {
 	public void run() {
 		this.kernel = (UserKernel) Kernel.kernel;
@@ -15,6 +17,14 @@ public class BTRconsole implements Runnable {
 		kernel.terminate();
 	}
 	
+	public void getCommands() {
+		System.out.print("BTR=-> ");
+		String line = kernel.getLine();
+		line.trim();
+		parseCommands(line);
+		runCommand(cmd, name, file);	
+	}
+
 	public void parseCommands(String line){
 		String param[] = line.split("\\s+");
 		cmd = param[0];
@@ -27,14 +37,6 @@ public class BTRconsole implements Runnable {
 			file = file.replace(">", "");
 		}
 	}
-	
-	public void getCommands() {
-		System.out.print("BTR=-> ");
-		String line = kernel.getLine();
-		line.trim();
-		parseCommands(line);
-		runCommand(cmd, name, file);	
-	}
 
 	public void runCommand(String cmd, String name, String file) {
 		if(cmd.equals("exit")) {
@@ -45,15 +47,15 @@ public class BTRconsole implements Runnable {
 			System.out.println("\n====Available Commands==== \n" + 
 								"tCreate <name> : creates a thread with specified name \n" +
 								"tRun <name>: runs a thread with specified name \n" +
-								"tSleep <name> : sleeps the specified thread \n" +
+								"tSleep <name> <time>: sleeps the specified thread \n" +
 								"tJoin <name> : joins the specified thread\n" +
-								"tSpawn <name> : spawns specified thread \n" +
+								"tSpawn: spawns specified thread \n" +
 								"tAbort <name> : aborts the specified thread\n");
 		}	
 		else if (cmd.equals("tCreate")) {
-			createThread custom = new createThread(name);
-			Thread t = new Thread(custom);
-			t.start();
+			KThread temp = new KThread();
+			temp.setName(name);
+			threadPool.add(temp);
 		}
 		else if (cmd.equals("tRun")) {
 			//ribin ish
@@ -78,8 +80,9 @@ public class BTRconsole implements Runnable {
 	}
 
 	private boolean running;
-	public UserKernel kernel;
-	public String cmd;
-	public String name;
-	public String file;
+	private UserKernel kernel;
+	private String cmd;
+	private String name;
+	private String file;
+	private ArrayList<KThread> threadPool = new ArrayList();
 }

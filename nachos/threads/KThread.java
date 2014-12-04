@@ -248,16 +248,19 @@ public class KThread {
 
 	runNextThread();
     }
-    /*
+    
     //========== USER ADDED STUFF ===============
-    public static void sleep(int x) {
-        while (getTime() < (getTime() + x))
-            this.status = statusBlocked;
+    public static void sleep(long x) {
+        long initialTime = Machine.timer().getTime();
+        currentThread.status = statusBlocked;
 
-        this.status = statusRunning;
+        while (Machine.timer().getTime() < (initialTime + x))
+            //spinning
+
+        currentThread.status = statusRunning;
     }
     //===========================================
-    */
+    
 
     /**
      * Moves this thread to the ready state and adds this to the scheduler's
