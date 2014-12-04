@@ -39,10 +39,12 @@ public class BTRconsole implements Runnable {
 	}
 
 	public void runCommand(String cmd, String name, String file) {
+
 		if(cmd.equals("exit")) {
 			System.out.println("Exiting nachOS");
 			running = false;
 		}
+
 		else if (cmd.equals("help")) {
 			System.out.println("\n====Available Commands==== \n" + 
 								"tCreate <name> : creates a thread with specified name \n" +
@@ -52,28 +54,48 @@ public class BTRconsole implements Runnable {
 								"tSpawn: spawns specified thread \n" +
 								"tAbort <name> : aborts the specified thread\n");
 		}	
+
 		else if (cmd.equals("tCreate")) {
 			KThread temp = new KThread();
 			temp.setName(name);
 			threadPool.add(temp);
+
+			if (threadPool.contains(temp))
+				System.out.println(temp + " created successfully");
+			else
+				System.out.println("could not create thread...");
 		}
+
 		else if (cmd.equals("tRun")) {
 			//ribin ish
 		}
+
+		//!!-- DOES NOT WORK. NEED TO CHANGE PARSER IN ORDER TO GET INT --!!
+		/*
 		else if (cmd.equals("tSleep")) {
-		//	name.sleep();
-			System.out.println(name + " is sleeping. Zzzzz. \n");
+
+			for(KThread t : threadPool)
+				if(t.getName().equals(name)) {
+					System.out.println(name + " is sleeping. Zzzzz. \n");
+					t.sleep(time);
+				}
+				else 
+					System.out.println(name + " not found, cannot sleep");
 		}
+		*/
 		else if (cmd.equals("tJoin")) {
 		//	name.join();
 			System.out.println(name + " has been joined successfully. \n");
 		}
+
 		else if (cmd.equals("tSpawn")) {
 			//barn ish
 		}
+
 		else if (cmd.equals("tAbort")) {
 			//barn ish 
 		}
+
 		else {
 			System.out.println(cmd + " is not a recognized command");			
 		}
