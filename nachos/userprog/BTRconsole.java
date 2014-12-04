@@ -17,6 +17,9 @@ public class BTRconsole implements Runnable {
 		kernel.terminate();
 	}
 	
+	//Uses the group built getLine() function of the nachOS kernel to 
+	//get input from the console to run as commands. Trims all the whitespace out
+	//then parses the command string out and runs the necessary code
 	public void getCommands() {
 		System.out.print("BTR=-> ");
 		String line = kernel.getLine();
@@ -25,6 +28,7 @@ public class BTRconsole implements Runnable {
 		runCommand(cmd, name, file);	
 	}
 
+	//parses the command string input by spaces
 	public void parseCommands(String line){
 		String param[] = line.split("\\s+");
 		cmd = param[0];
@@ -38,6 +42,8 @@ public class BTRconsole implements Runnable {
 		}
 	}
 
+	//Runs the commands using simple if else statements to 
+	//run the proper command and show it working properly
 	public void runCommand(String cmd, String name, String file) {
 
 		if(cmd.equals("exit")) {
@@ -71,13 +77,11 @@ public class BTRconsole implements Runnable {
 			//ribin ish
 		}
 
-		//!!-- DOES NOT WORK. NEED TO CHANGE PARSER IN ORDER TO GET INT --!!
-
 		else if (cmd.equals("tSleep")) {
 
 			for(KThread t : threadPool)
 				if((t.getName()).equals(name)) {
-					System.out.println(name + " is sleeping. Zzzzz. \n");
+					System.out.println(name + " is sleeping for " + 100 + " cycles. Zzzzz.");
 					t.sleepTime(100);
 				}
 				else 

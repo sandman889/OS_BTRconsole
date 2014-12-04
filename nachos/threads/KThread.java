@@ -253,10 +253,10 @@ public class KThread {
     public static void sleepTime(int x) {
         long initialTime = Machine.timer().getTime();
         currentThread.status = statusBlocked;
-        long currentTime = initialTime;
+        long endTime = initialTime + x;
 
-        while (currentTime < (initialTime + x))
-            currentTime = Machine.timer().getTime();
+        while (initialTime < endTime)
+            ++initialTime;
 
         currentThread.status = statusRunning;
     }
