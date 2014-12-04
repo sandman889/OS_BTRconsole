@@ -248,7 +248,7 @@ public class KThread {
 
 	runNextThread();
     }
-
+    /*
     //========== USER ADDED STUFF ===============
     public static void sleep(int x) {
         while (getTime() < (getTime() + x))
@@ -257,6 +257,7 @@ public class KThread {
         this.status = statusRunning;
     }
     //===========================================
+    */
 
     /**
      * Moves this thread to the ready state and adds this to the scheduler's
