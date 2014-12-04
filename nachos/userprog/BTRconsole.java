@@ -52,7 +52,8 @@ public class BTRconsole implements Runnable {
 								"tSleep <name> <time>: sleeps the specified thread \n" +
 								"tJoin <name> : joins the specified thread\n" +
 								"tSpawn: spawns specified thread \n" +
-								"tAbort <name> : aborts the specified thread\n");
+								"tAbort <name> : aborts the specified thread\n" +
+								"tList : lists all of the threads in the pool\n");
 		}	
 
 		else if (cmd.equals("tCreate")) {
