@@ -50,9 +50,11 @@ public class BTRconsole implements Runnable {
 								"tJoin <name> : joins the specified thread\n" +
 								"tSpawn <name> : spawns specified thread \n" +
 								"tAbort <name> : aborts the specified thread\n");
-		}
+		}	
 		else if (cmd.equals("tCreate")) {
-			//ribin ish
+			createThread custom = new createThread(name);
+			Thread t = new Thread(custom);
+			t.start();
 		}
 		else if (cmd.equals("tRun")) {
 			//ribin ish
