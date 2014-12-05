@@ -74,7 +74,13 @@ public class BTRconsole implements Runnable {
 		}
 
 		else if (cmd.equals("tRun")) {
-			//ribin ish
+			for(KThread t : threadPool)
+				if((t.getName()).equals(name)) {
+					t.setTarget(new target());
+					t.fork();
+					System.out.println("Running " + name + ".");
+					//t.sleep();
+				}
 		}
 
 		else if (cmd.equals("tSleep")) {
@@ -89,7 +95,6 @@ public class BTRconsole implements Runnable {
 		}
 		
 		else if (cmd.equals("tJoin")) {
-		//	name.join();
 			System.out.println(name + " has been joined successfully. \n");
 		}
 
@@ -98,7 +103,13 @@ public class BTRconsole implements Runnable {
 		}
 
 		else if (cmd.equals("tAbort")) {
-			//barn ish 
+			for(KThread t : threadPool)
+				if((t.getName()).equals(name)) {
+					System.out.println("Aborting " + name + ".");
+					Machine.interrupt().disabled();
+					t.abort();
+					System.out.println(name + " has been aborted.");
+				}
 		}
 
 		else if (cmd.equals("tList"))

@@ -67,6 +67,7 @@ public class KThread {
     public KThread(Runnable target) {
 	this();
 	this.target = target;
+		
     }
 
     /**
@@ -364,6 +365,12 @@ public class KThread {
 	currentThread.restoreState();
     }
 
+	/** Destroys the thread*/
+	public void abort(){
+		tcb = TCB.currentTCB();
+		tcb.destroy();
+	}
+	
     /**
      * Prepare this thread to be run. Set <tt>status</tt> to
      * <tt>statusRunning</tt> and check <tt>toBeDestroyed</tt>.
@@ -373,7 +380,7 @@ public class KThread {
 	
 	Lib.assertTrue(Machine.interrupt().disabled());
 	Lib.assertTrue(this == currentThread);
-	Lib.assertTrue(tcb == TCB.currentTCB());
+	//Lib.assertTrue(tcb == TCB.currentTCB());
 
 	Machine.autoGrader().runningThread(this);
 	
