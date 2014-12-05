@@ -22,7 +22,7 @@ threads =	ThreadedKernel KThread Alarm \
 		Condition2 Communicator Rider ElevatorController \
 		PriorityScheduler LotteryScheduler Boat
 
-userprog =	UserKernel UThread UserProcess SynchConsole BTRconsole tJoin tSleep
+userprog =	UserKernel UThread UserProcess SynchConsole BTRconsole target
 
 vm =		VMKernel VMProcess
 
