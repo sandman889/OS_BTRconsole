@@ -184,7 +184,6 @@ public class KThread {
      */
     public static void finish() {
 	Lib.debug(dbgThread, "Finishing thread: " + currentThread.toString());
-	
 	Machine.interrupt().disable();
 
 	Machine.autoGrader().finishingCurrentThread();
@@ -194,8 +193,9 @@ public class KThread {
 
 
 	currentThread.status = statusFinished;
-	
+
 	sleep();
+
     }
 
     /**
@@ -243,7 +243,6 @@ public class KThread {
 	Lib.debug(dbgThread, "Sleeping thread: " + currentThread.toString());
 	
 	Lib.assertTrue(Machine.interrupt().disabled());
-
 	if (currentThread.status != statusFinished)
 	    currentThread.status = statusBlocked;
 
@@ -293,22 +292,47 @@ public class KThread {
      * but have a null int and set the ID of the parent to the int.
      */
     public void join() {
-	   if (this.status == 1)
+	   if (this.status == 4)
             return;
        Lib.debug(dbgThread, "Joining to thread: " + toString());
 
-        this.finish();
+       this.finishT();
 
-
-	   //Lib.assertTrue(this != currentThread);
        System.out.println(this.status);
        if(this.status == 0)
         return;
-       //while (this.status != 1 || this.status != 3 || this.status != 4){
 
-       //}
 
     }
+
+
+    public static void finishT() {
+    Lib.debug(dbgThread, "Finishing thread: " + currentThread.toString());
+    Machine.interrupt().disable();
+
+    Machine.autoGrader().finishingCurrentThread();
+
+    Lib.assertTrue(toBeDestroyed == null);
+    toBeDestroyed = currentThread;
+
+
+    currentThread.status = statusFinished;
+
+    sleepT();
+
+    }
+
+
+    public static void sleepT() {
+    Lib.debug(dbgThread, "Sleeping thread: " + currentThread.toString());
+    
+    Lib.assertTrue(Machine.interrupt().disabled());
+    if (currentThread.status != statusFinished)
+        currentThread.status = statusBlocked;
+
+   // runNextThread();
+    }
+    
 
 
     /**
