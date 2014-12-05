@@ -384,7 +384,6 @@ public class KThread {
 
 	/** Destroys the thread*/
 	public void abort(){
-		tcb = TCB.currentTCB();
 		tcb.destroy();
 	}
 	
