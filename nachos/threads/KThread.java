@@ -34,8 +34,8 @@ public class KThread {
      * @return	the current thread.
      */
     public static KThread currentThread() {
-	Lib.assertTrue(currentThread != null);
-	return currentThread;
+		Lib.assertTrue(currentThread != null);
+		return currentThread;
     }
     
     /**
@@ -43,20 +43,20 @@ public class KThread {
      * create an idle thread as well.
      */
     public KThread() {
-	if (currentThread != null) {
-	    tcb = new TCB();
-	}	    
-	else {
-	    readyQueue = ThreadedKernel.scheduler.newThreadQueue(false);
-	    readyQueue.acquire(this);	    
+		if (currentThread != null) {
+	    	tcb = new TCB();
+		}	    
+		else {
+	    	readyQueue = ThreadedKernel.scheduler.newThreadQueue(false);
+	    	readyQueue.acquire(this);	    
 
-	    currentThread = this;
-	    tcb = TCB.currentTCB();
-	    name = "main";
-	    restoreState();
+	    	currentThread = this;
+	    	tcb = TCB.currentTCB();
+	    	name = "main";
+	    	restoreState();
 
-	    createIdleThread();
-	}
+	    	createIdleThread();
+		}
     }
 
     /**
@@ -408,7 +408,8 @@ public class KThread {
 
 	/** Destroys the thread*/
 	public void abort(){
-		tcb.destroy();
+		//tcb = currentThread.tcb;
+		//tcb.destroy();
 	}
 	
     /**

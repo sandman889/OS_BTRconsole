@@ -111,13 +111,15 @@ public class BTRconsole implements Runnable {
 		}
 
 		else if (cmd.equals("tAbort")) {
-			for(KThread t : threadPool)
+			for(int i = 0; i < threadPool.size(); ++i) {
+				KThread t = threadPool.get(i);
+				System.out.println("here:" + t.getName() );
 				if((t.getName()).equals(name)) {
 					System.out.println("Aborting " + name + ".");
-					Machine.interrupt().disabled();
-					t.abort();
+					threadPool.remove(i);
 					System.out.println(name + " has been aborted.");
 				}
+			}
 		}
 
 		else if (cmd.equals("tList"))
