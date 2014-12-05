@@ -89,15 +89,19 @@ public class BTRconsole implements Runnable {
 		}
 		
 		else if (cmd.equals("tJoin")) {
-			for(KThread t : threadPool)
+			for(KThread t : threadPool){
 				if((t.getName()).equals(name)) 
 					t.join();
 				
+			}
 			System.out.println(name + " has been joined successfully. \n");
 		}
 
 		else if (cmd.equals("tSpawn")) {
-			//barn ish
+			KThread temp = new KThread();
+			threadPool.add(temp);
+			System.out.println("Default thread has been spawned, named '" + temp.getName() + "'" + '\n');
+
 		}
 
 		else if (cmd.equals("tAbort")) {

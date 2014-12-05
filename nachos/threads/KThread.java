@@ -249,6 +249,9 @@ public class KThread {
 	runNextThread();
     }
     
+
+
+
     //========== USER ADDED STUFF ===============
     public static void sleepTime(int x) {
         long initialTime = Machine.timer().getTime();
@@ -285,13 +288,27 @@ public class KThread {
      * return immediately. This method must only be called once; the second
      * call is not guaranteed to return. This thread must not be the current
      * thread.
+     * keep track of child thread inside of vector, not caring where it is 
+     * but have a null int and set the ID of the parent to the int.
      */
     public void join() {
-	Lib.debug(dbgThread, "Joining to thread: " + toString());
+	   if (this.status == 1)
+            return;
+       Lib.debug(dbgThread, "Joining to thread: " + toString());
 
-	Lib.assertTrue(this != currentThread);
+        this.finish();
+
+
+	   //Lib.assertTrue(this != currentThread);
+       System.out.println(this.status);
+       if(this.status == 0)
+        return;
+       //while (this.status != 1 || this.status != 3 || this.status != 4){
+
+       //}
 
     }
+
 
     /**
      * Create the idle thread. Whenever there are no threads ready to be run,
@@ -442,7 +459,7 @@ public class KThread {
      * on the ready queue and not running).ed
      */
     private int status = statusNew;
-    private String name = "(unnamed thread)";
+    private String name = "unnamed thread";
     private Runnable target;
     private TCB tcb;
 
